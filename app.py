@@ -497,15 +497,13 @@ def main():
             modal_button_clicked = False
             try:
                 selector = 'div[role="dialog"] button.btn-primary' 
-                # 先等待按钮出现（最多 8 秒）
-                if sb.is_element_visible(selector, timeout=8):
-                    # HTML 中存在 disabled 属性时，get_attribute("disabled") 通常返回 "true" 或 ""，不存在则返回 None
-                    if sb.get_attribute(selector, "disabled") is None:
-                        sb.click(selector, timeout=8)
-                        modal_button_clicked = True
-                        print("✅ 已点击续期按钮")
-                    else:
-                        print("续期按钮被禁用")
+                # HTML 中存在 disabled 属性时，get_attribute("disabled") 通常返回 "true" 或 ""，不存在则返回 None
+                if sb.get_attribute(selector, "disabled") is None:
+                    sb.click(selector, timeout=8)
+                    modal_button_clicked = True
+                    print("✅ 已点击续期按钮")
+                else:
+                    print("续期按钮被禁用")
             except Exception as e:
                 print(f"续期按钮点击失败: {e}")
 
